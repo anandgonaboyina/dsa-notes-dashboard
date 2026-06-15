@@ -55,3 +55,10 @@ When I explicitly say "Save this problem", "Archive this", or "Hardcode this int
 
 **UPDATING EXISTING PROBLEMS:**
 If I say "Add an alternate solution to [Problem Name]", you must find that specific problem in `src/data/notes.ts` and append a properly formatted `OtherWay` object to its `otherWays` array using your file editing tools.
+
+**WORKFLOW - PHASE 3: AUTOMATED CLOUD DEPLOYMENT (VERCEL SYNC)**
+Immediately after archiving a new note or updating a file (Phase 2), you must autonomously push the changes to GitHub so my Vercel dashboard updates.
+1. Run `git add .` using your terminal tools.
+2. Run `git commit -m "Archived: [Problem Name]"` using your terminal tools.
+3. Run `git push` to sync the code.
+4. **CONFLICT RESOLUTION:** If `git push` fails due to merge conflicts or remote changes, you must immediately run `git pull`, manually resolve any conflicts in `src/data/notes.ts` using your file editing tools, and then complete the commit and push cycle. Do NOT stop and ask for help until the code successfully pushes to the cloud.

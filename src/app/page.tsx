@@ -30,6 +30,7 @@ export default function Home() {
   const [feedbackKey, setFeedbackKey] = useState(0);
   const [feedbackType, setFeedbackType] = useState<'none' | 'shuriken' | 'turtle'>('none');
   const [selectedFilterTag, setSelectedFilterTag] = useState<string | null>(null);
+  const [friends, setFriends] = useState<{name: string, url: string}[]>([]);
   // Optional local state in case they import data during runtime
   const [localNotes, setLocalNotes] = useState<DSANote[]>(dsaNotes);
 
@@ -59,6 +60,11 @@ export default function Home() {
       }
       return migrated;
     };
+
+    fetch('/api/friends')
+      .then(res => res.json())
+      .then(data => setFriends(data))
+      .catch(() => {});
 
     fetch('/api/revisions')
       .then(res => res.json())
@@ -358,6 +364,55 @@ export default function Home() {
           </div>
 
 
+          <div style={{ marginTop: '2rem', padding: '10px', background: 'var(--panel-bg)', border: '1px solid var(--panel-border)', borderRadius: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 'bold', letterSpacing: '1px' }}>
+                Friends Network
+              </div>
+              <button 
+                className="btn" 
+                style={{ padding: '2px 6px', fontSize: '0.7rem' }}
+                onClick={() => {
+                  const name = prompt("Friend's Name:");
+                  if (!name) return;
+                  const url = prompt("Friend's Vercel URL (e.g. https://...):");
+                  if (!url) return;
+                  const updated = [...friends, { name, url: url.startsWith('http') ? url : `https://${url}` }];
+                  setFriends(updated);
+                  fetch('/api/friends', { method: 'POST', body: JSON.stringify(updated) });
+                }}
+              >
+                + Add
+              </button>
+            </div>
+            {friends.length === 0 ? (
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', padding: '10px 0' }}>No friends added yet.</div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {friends.map((f, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-color)', padding: '6px 10px', borderRadius: '6px', border: '1px solid var(--panel-border)' }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-main)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{f.name}</span>
+                    <div style={{ display: 'flex', gap: '5px' }}>
+                      <a href={f.url} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: '2px 6px', fontSize: '0.7rem', color: 'var(--accent)', borderColor: 'var(--accent)' }}>View</a>
+                      <button 
+                        className="btn" 
+                        style={{ padding: '2px 6px', fontSize: '0.7rem', color: 'var(--danger)', borderColor: 'var(--danger)' }}
+                        onClick={() => {
+                          if (confirm(`Remove ${f.name}?`)) {
+                            const updated = friends.filter((_, idx) => idx !== i);
+                            setFriends(updated);
+                            fetch('/api/friends', { method: 'POST', body: JSON.stringify(updated) });
+                          }
+                        }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Quick actions wrapper */}
           <div style={{ marginTop: '2rem' }}>
