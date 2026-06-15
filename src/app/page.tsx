@@ -703,18 +703,22 @@ export default function Home() {
                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
 
                       <div className="complexities" style={{ margin: 0, filter: (isBlindMode && !revealedCode) ? 'blur(6px)' : 'none', opacity: (isBlindMode && !revealedCode) ? 0.5 : 1, transition: 'all 0.3s' }}>
-                        {revisionMap[selectedNote.id]?.solveTimes?.length ? (
-                          <>
-                            <div className="complexity-badge" style={{ borderColor: 'var(--success)', color: 'var(--success)' }}>
-                              <span>Last Time</span>
-                              <span>{Math.floor(revisionMap[selectedNote.id].solveTimes.slice(-1)[0] / 60)}m {revisionMap[selectedNote.id].solveTimes.slice(-1)[0] % 60}s</span>
-                            </div>
-                            <div className="complexity-badge" style={{ borderColor: 'var(--warning)', color: 'var(--warning)' }}>
-                              <span>Best Time</span>
-                              <span>{Math.floor(Math.min(...revisionMap[selectedNote.id].solveTimes) / 60)}m {Math.min(...revisionMap[selectedNote.id].solveTimes) % 60}s</span>
-                            </div>
-                          </>
-                        ) : null}
+                        {(() => {
+                          const st = revisionMap[selectedNote.id]?.solveTimes;
+                          if (!st || st.length === 0) return null;
+                          return (
+                            <>
+                              <div className="complexity-badge" style={{ borderColor: 'var(--success)', color: 'var(--success)' }}>
+                                <span>Last Time</span>
+                                <span>{Math.floor(st.slice(-1)[0] / 60)}m {st.slice(-1)[0] % 60}s</span>
+                              </div>
+                              <div className="complexity-badge" style={{ borderColor: 'var(--warning)', color: 'var(--warning)' }}>
+                                <span>Best Time</span>
+                                <span>{Math.floor(Math.min(...st) / 60)}m {Math.min(...st) % 60}s</span>
+                              </div>
+                            </>
+                          );
+                        })()}
                         <div className="complexity-badge">
                           <span>Time</span>
                           <span>{selectedNote.complexity.time}</span>
