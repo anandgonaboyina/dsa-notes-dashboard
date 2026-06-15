@@ -1,0 +1,29 @@
+{
+  "example-3": {
+    "lastRevised": 1781503266128,
+    "nextDue": 1781762466128,
+    "interval": 3,
+    "solveTimes": [
+      4
+    ]
+  },
+  "example-2": {
+    "lastRevised": 1781506359065,
+    "nextDue": 1781592759065,
+    "interval": 1,
+    "history": [
+      1781506359065
+    ],
+    "solveTimes": [
+      23
+    ]
+  },
+  "example-1": {
+    "lastRevised": 1781508955415,
+    "nextDue": 1781768155415,
+    "interval": 3,
+    "history": [
+      1781508955415
+    ]
+  }
+}
