@@ -19,8 +19,9 @@ export async function POST(request: Request) {
     }
 
     let filePath = '';
-    if (action === 'ADD_ALTERNATE_WAY') filePath = 'src/data/notes.json';
+    if (action === 'ADD_ALTERNATE_WAY' || action === 'UPDATE_NOTE_FIELD') filePath = 'src/data/notes.json';
     else if (action === 'UPDATE_REVISIONS') filePath = 'src/data/revisions.json';
+    else if (action === 'ADD_FRIEND') filePath = 'src/data/friends.json';
     else return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
 
     const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
@@ -64,6 +65,16 @@ export async function POST(request: Request) {
       if (noteIndex === -1) return NextResponse.json({ error: 'Note not found in GitHub file' }, { status: 404 });
       if (!currentData[noteIndex].otherWays) currentData[noteIndex].otherWays = [];
       currentData[noteIndex].otherWays.push(alternateWay);
+      newContentString = JSON.stringify(currentData, null, 2);
+    } else if (action === 'UPDATE_NOTE_FIELD') {
+      const { noteId, field, value } = payload;
+      const noteIndex = currentData.findIndex((n: any) => n.id === noteId);
+      if (noteIndex === -1) return NextResponse.json({ error: 'Note not found in GitHub file' }, { status: 404 });
+      currentData[noteIndex][field] = value;
+      newContentString = JSON.stringify(currentData, null, 2);
+    } else if (action === 'ADD_FRIEND') {
+      if (!Array.isArray(currentData)) currentData = [];
+      currentData.push(payload);
       newContentString = JSON.stringify(currentData, null, 2);
     } else if (action === 'UPDATE_REVISIONS') {
       currentData = payload;

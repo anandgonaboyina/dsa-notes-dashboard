@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import notesData from '@/data/notes.json';
-import { friendsList } from '@/data/friends';
+import friendsList from '@/data/friends.json';
 
 export interface OtherWay { id: string; title: string; code: string; logic: string; complexity: { time: string; space: string; }; }
 export interface DSANote { id: string; title: string; tags: string[]; problemLogic: string; mistakes: string; code: string; complexity: { time: string; space: string; }; dateAdded: string; otherWays: OtherWay[]; problemUrl?: string; }
@@ -379,7 +379,7 @@ export default function Home() {
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', padding: '10px 0' }}>No friends added yet.</div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {friendsList.map((f, i) => (
+                {friendsList.map((f: any, i: number) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-color)', padding: '6px 10px', borderRadius: '6px', border: '1px solid var(--panel-border)' }}>
                     <span style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-main)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{f.name}</span>
                     <div style={{ display: 'flex', gap: '5px' }}>
@@ -387,6 +387,21 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
+                <button className="btn" onClick={() => {
+                  const name = prompt("Friend's Name:");
+                  if (!name) return;
+                  const url = prompt("Friend's Vercel URL:");
+                  if (!url) return;
+                  fetch('/api/github', {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'ADD_FRIEND', payload: { name, url } })
+                  }).then(res => res.json()).then(data => {
+                    if (data.success) alert("Friend added to GitHub!");
+                    else alert(`Error: ${data.error}\nDetails: ${data.details}`);
+                  });
+                }} style={{ padding: '4px', fontSize: '0.8rem', width: '100%', justifyContent: 'center' }}>
+                  + Add Friend
+                </button>
               </div>
             )}
           </div>
@@ -820,15 +835,43 @@ export default function Home() {
               <div className="detail-right">
                 {showExplanation && (
                   <div className="detail-section" style={{ borderLeft: '4px solid var(--accent)' }}>
-                    <h3>My Notes</h3>
-                    <p style={{ lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>{selectedNote.problemLogic}</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <h3 style={{ margin: 0 }}>My Notes</h3>
+                      <button className="btn" style={{ padding: '2px 8px', fontSize: '0.7rem' }} onClick={() => {
+                        const newLogic = prompt("Edit Notes:", selectedNote.problemLogic);
+                        if (newLogic && newLogic !== selectedNote.problemLogic) {
+                          setSelectedNote({ ...selectedNote, problemLogic: newLogic });
+                          fetch('/api/github', {
+                            method: 'POST',
+                            body: JSON.stringify({ action: 'UPDATE_NOTE_FIELD', payload: { noteId: selectedNote.id, field: 'problemLogic', value: newLogic } })
+                          }).then(res => res.json()).then(data => {
+                            if (!data.success) alert(`Error: ${data.error}\nDetails: ${data.details}`);
+                          });
+                        }
+                      }}>Edit</button>
+                    </div>
+                    <p style={{ lineHeight: '1.6', whiteSpace: 'pre-wrap', marginTop: '10px' }}>{selectedNote.problemLogic}</p>
                   </div>
                 )}
 
                 {showMistakes && (
                   <div className="detail-section" style={{ borderLeft: '4px solid var(--danger)' }}>
-                    <h3>Mistakes to Avoid</h3>
-                    <p style={{ lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>{selectedNote.mistakes}</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <h3 style={{ margin: 0 }}>Mistakes to Avoid</h3>
+                      <button className="btn" style={{ padding: '2px 8px', fontSize: '0.7rem' }} onClick={() => {
+                        const newMistakes = prompt("Edit Mistakes:", selectedNote.mistakes);
+                        if (newMistakes && newMistakes !== selectedNote.mistakes) {
+                          setSelectedNote({ ...selectedNote, mistakes: newMistakes });
+                          fetch('/api/github', {
+                            method: 'POST',
+                            body: JSON.stringify({ action: 'UPDATE_NOTE_FIELD', payload: { noteId: selectedNote.id, field: 'mistakes', value: newMistakes } })
+                          }).then(res => res.json()).then(data => {
+                            if (!data.success) alert(`Error: ${data.error}\nDetails: ${data.details}`);
+                          });
+                        }
+                      }}>Edit</button>
+                    </div>
+                    <p style={{ lineHeight: '1.6', whiteSpace: 'pre-wrap', marginTop: '10px' }}>{selectedNote.mistakes}</p>
                   </div>
                 )}
               </div>
