@@ -43,7 +43,7 @@ export default function Home() {
   const [selectedFilterTag, setSelectedFilterTag] = useState<string | null>(null);
   // Optional local state in case they import data during runtime
   const [localNotes, setLocalNotes] = useState<DSANote[]>(dsaNotes);
-  const [friends, setFriends] = useState(friendsList);
+  const [friends, setFriends] = useState<Array<{ name: string; url: string }>>(friendsList);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showAddNoteModal, setShowAddNoteModal] = useState(false);
   const [lastRevisedDays, setLastRevisedDays] = useState<string>("");
