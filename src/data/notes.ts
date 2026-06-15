@@ -1,1705 +1,2081 @@
-export interface OtherWay { id: string; title: string; code: string; logic: string; complexity: { time: string; space: string; }; }
-export interface DSANote { id: string; title: string; tags: string[]; problemLogic: string; mistakes: string; code: string; complexity: { time: string; space: string; }; dateAdded: string; otherWays: OtherWay[]; problemUrl?: string; }
+export interface OtherWay {
+  id: string;
+  title: string;
+  code: string;
+  logic: string;
+  complexity: { time: string; space: string; };
+}
+
+export interface DSANote {
+  id: string;
+  title: string;
+  tags: string[];
+  problemLogic: string;
+  mistakes: string;
+  code: string;
+  complexity: { time: string; space: string; };
+  dateAdded: string;
+  otherWays: OtherWay[];
+  problemUrl?: string;
+}
 
 export const dsaNotes: DSANote[] = [
   {
-    "id": "prob-dummy-0",
-    "title": "Dummy Problem 0",
+    "id": "prob-1",
+    "title": "LeetCode 724: Dummy Problem 1",
+    "tags": [
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 1. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-25T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-1",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-2",
+    "title": "LeetCode 970: Dummy Problem 2",
+    "tags": [
+      "Math",
+      "Sliding Window"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 2. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-05-13T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-2",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-3",
+    "title": "LeetCode 229: Dummy Problem 3",
+    "tags": [
+      "Two Pointers",
+      "Trees"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 3. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-11T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-4",
+    "title": "LeetCode 732: Dummy Problem 4",
+    "tags": [
+      "Binary Search",
+      "String"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 4. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-25T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-5",
+    "title": "LeetCode 982: Dummy Problem 5",
+    "tags": [
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 5. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-21T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-6",
+    "title": "LeetCode 635: Dummy Problem 6",
+    "tags": [
+      "Sliding Window"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 6. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-04T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-7",
+    "title": "LeetCode 786: Dummy Problem 7",
+    "tags": [
+      "Greedy",
+      "Linked List",
+      "Tries"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 7. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-30T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-8",
+    "title": "LeetCode 515: Dummy Problem 8",
+    "tags": [
+      "Heap",
+      "Linked List",
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 8. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-19T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-8",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-9",
+    "title": "LeetCode 84: Dummy Problem 9",
+    "tags": [
+      "Linked List",
+      "Binary Search",
+      "Trees"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 9. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-07T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-10",
+    "title": "LeetCode 669: Dummy Problem 10",
+    "tags": [
+      "Backtracking",
+      "Sliding Window",
+      "Trees"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 10. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-22T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-11",
+    "title": "LeetCode 139: Dummy Problem 11",
+    "tags": [
+      "String",
+      "Graphs"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 11. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-06-02T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-12",
+    "title": "LeetCode 693: Dummy Problem 12",
+    "tags": [
+      "Trees",
+      "Backtracking",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 12. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-17T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-13",
+    "title": "LeetCode 13: Dummy Problem 13",
+    "tags": [
+      "Math",
+      "Tries"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 13. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-04-27T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-14",
+    "title": "LeetCode 687: Dummy Problem 14",
+    "tags": [
+      "Tries",
+      "Graphs"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 14. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-06-01T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-14",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-15",
+    "title": "LeetCode 4: Dummy Problem 15",
+    "tags": [
+      "Graphs",
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 15. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-03T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-15",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-16",
+    "title": "LeetCode 233: Dummy Problem 16",
+    "tags": [
+      "Array",
+      "Backtracking",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 16. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-21T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-17",
+    "title": "LeetCode 89: Dummy Problem 17",
+    "tags": [
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 17. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-07T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-18",
+    "title": "LeetCode 589: Dummy Problem 18",
+    "tags": [
+      "Trees",
+      "Sliding Window"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 18. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-04-26T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-18",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-19",
+    "title": "LeetCode 964: Dummy Problem 19",
+    "tags": [
+      "Math",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 19. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-04T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-19",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-20",
+    "title": "LeetCode 929: Dummy Problem 20",
+    "tags": [
+      "Heap",
+      "Dynamic Programming",
+      "Two Pointers"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 20. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-23T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-21",
+    "title": "LeetCode 624: Dummy Problem 21",
+    "tags": [
+      "Greedy"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 21. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-03T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-22",
+    "title": "LeetCode 770: Dummy Problem 22",
+    "tags": [
+      "Array",
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 22. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-05-20T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-22",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-23",
+    "title": "LeetCode 301: Dummy Problem 23",
+    "tags": [
+      "Two Pointers"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 23. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-09T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-24",
+    "title": "LeetCode 384: Dummy Problem 24",
+    "tags": [
+      "Heap",
+      "Linked List",
+      "Backtracking"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 24. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-06-09T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-25",
+    "title": "LeetCode 385: Dummy Problem 25",
+    "tags": [
+      "Sliding Window",
+      "Trees",
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 25. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-06-07T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-26",
+    "title": "LeetCode 803: Dummy Problem 26",
+    "tags": [
+      "Math"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 26. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-10T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-27",
+    "title": "LeetCode 710: Dummy Problem 27",
+    "tags": [
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 27. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-04T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-28",
+    "title": "LeetCode 486: Dummy Problem 28",
+    "tags": [
+      "Sliding Window",
+      "Trees"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 28. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-04-18T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-29",
+    "title": "LeetCode 668: Dummy Problem 29",
+    "tags": [
+      "Array",
+      "String"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 29. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-06-10T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-30",
+    "title": "LeetCode 207: Dummy Problem 30",
+    "tags": [
+      "Graphs",
+      "Binary Search",
+      "Greedy"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 30. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-21T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-31",
+    "title": "LeetCode 678: Dummy Problem 31",
+    "tags": [
+      "Math",
+      "Binary Search",
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 31. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-08T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-32",
+    "title": "LeetCode 864: Dummy Problem 32",
     "tags": [
       "Dynamic Programming",
-      "Arrays"
+      "Sliding Window",
+      "Backtracking"
     ],
-    "problemLogic": "This is the logic for dummy problem 0. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 0\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 32. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
     "complexity": {
-      "time": "O(N)",
+      "time": "O(log N)",
       "space": "O(1)"
     },
-    "dateAdded": "2026-06-15T08:08:45.174Z",
+    "dateAdded": "2026-04-21T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-1",
-    "title": "Dummy Problem 1",
+    "id": "prob-33",
+    "title": "LeetCode 114: Dummy Problem 33",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Greedy",
+      "Heap"
     ],
-    "problemLogic": "This is the logic for dummy problem 1. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 1\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 33. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
+      "time": "O(1)",
       "space": "O(1)"
     },
-    "dateAdded": "2026-06-14T08:08:45.174Z",
+    "dateAdded": "2026-05-31T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-2",
-    "title": "Dummy Problem 2",
+    "id": "prob-34",
+    "title": "LeetCode 51: Dummy Problem 34",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Graphs"
     ],
-    "problemLogic": "This is the logic for dummy problem 2. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 2\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 34. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
+      "time": "O(1)",
       "space": "O(1)"
     },
-    "dateAdded": "2026-06-13T08:08:45.174Z",
+    "dateAdded": "2026-04-23T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-3",
-    "title": "Dummy Problem 3",
+    "id": "prob-35",
+    "title": "LeetCode 272: Dummy Problem 35",
     "tags": [
-      "Dynamic Programming",
-      "Arrays"
+      "Sliding Window"
     ],
-    "problemLogic": "This is the logic for dummy problem 3. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 3\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 35. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(log N)",
+      "space": "O(log N)"
     },
-    "dateAdded": "2026-06-12T08:08:45.174Z",
-    "otherWays": []
+    "dateAdded": "2026-05-16T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
   },
   {
-    "id": "prob-dummy-4",
-    "title": "Dummy Problem 4",
+    "id": "prob-36",
+    "title": "LeetCode 478: Dummy Problem 36",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Backtracking"
     ],
-    "problemLogic": "This is the logic for dummy problem 4. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 4\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 36. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(1)",
+      "space": "O(N)"
     },
-    "dateAdded": "2026-06-11T08:08:45.174Z",
+    "dateAdded": "2026-05-14T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-5",
-    "title": "Dummy Problem 5",
+    "id": "prob-37",
+    "title": "LeetCode 583: Dummy Problem 37",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Greedy"
     ],
-    "problemLogic": "This is the logic for dummy problem 5. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 5\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 37. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(N!)",
+      "space": "O(log N)"
     },
-    "dateAdded": "2026-06-10T08:08:45.174Z",
-    "otherWays": []
+    "dateAdded": "2026-06-12T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
   },
   {
-    "id": "prob-dummy-6",
-    "title": "Dummy Problem 6",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 6. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 6\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-06-09T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-7",
-    "title": "Dummy Problem 7",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 7. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 7\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-06-08T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-8",
-    "title": "Dummy Problem 8",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 8. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 8\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-06-07T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-9",
-    "title": "Dummy Problem 9",
+    "id": "prob-38",
+    "title": "LeetCode 498: Dummy Problem 38",
     "tags": [
       "Dynamic Programming",
-      "Arrays"
+      "Graphs"
     ],
-    "problemLogic": "This is the logic for dummy problem 9. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 9\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 38. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(N log N)",
+      "space": "O(N)"
     },
-    "dateAdded": "2026-06-06T08:08:45.174Z",
+    "dateAdded": "2026-06-13T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-10",
-    "title": "Dummy Problem 10",
+    "id": "prob-39",
+    "title": "LeetCode 704: Dummy Problem 39",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Array",
+      "Binary Search"
     ],
-    "problemLogic": "This is the logic for dummy problem 10. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 10\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 39. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(N^2)",
+      "space": "O(log N)"
     },
-    "dateAdded": "2026-06-05T08:08:45.174Z",
-    "otherWays": []
+    "dateAdded": "2026-05-29T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
   },
   {
-    "id": "prob-dummy-11",
-    "title": "Dummy Problem 11",
+    "id": "prob-40",
+    "title": "LeetCode 813: Dummy Problem 40",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Binary Search"
     ],
-    "problemLogic": "This is the logic for dummy problem 11. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 11\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 40. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
     "complexity": {
       "time": "O(N)",
       "space": "O(1)"
     },
-    "dateAdded": "2026-06-04T08:08:45.174Z",
+    "dateAdded": "2026-06-12T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-40",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-41",
+    "title": "LeetCode 291: Dummy Problem 41",
+    "tags": [
+      "Backtracking"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 41. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-15T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-12",
-    "title": "Dummy Problem 12",
+    "id": "prob-42",
+    "title": "LeetCode 885: Dummy Problem 42",
+    "tags": [
+      "Two Pointers",
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 42. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-06-09T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-43",
+    "title": "LeetCode 222: Dummy Problem 43",
+    "tags": [
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 43. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-09T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-43",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-44",
+    "title": "LeetCode 197: Dummy Problem 44",
+    "tags": [
+      "Backtracking",
+      "Dynamic Programming",
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 44. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-07T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-45",
+    "title": "LeetCode 704: Dummy Problem 45",
+    "tags": [
+      "Greedy",
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 45. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-06-12T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-45",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-46",
+    "title": "LeetCode 932: Dummy Problem 46",
+    "tags": [
+      "String",
+      "Linked List",
+      "Trees"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 46. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-06-05T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-47",
+    "title": "LeetCode 828: Dummy Problem 47",
+    "tags": [
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 47. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-05-24T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-47",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-48",
+    "title": "LeetCode 906: Dummy Problem 48",
+    "tags": [
+      "Binary Search",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 48. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-03T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-49",
+    "title": "LeetCode 238: Dummy Problem 49",
+    "tags": [
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 49. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-31T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-50",
+    "title": "LeetCode 795: Dummy Problem 50",
+    "tags": [
+      "Linked List",
+      "Backtracking"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 50. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-08T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-51",
+    "title": "LeetCode 80: Dummy Problem 51",
+    "tags": [
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 51. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-01T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-51",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-52",
+    "title": "LeetCode 837: Dummy Problem 52",
+    "tags": [
+      "Binary Search",
+      "Tries",
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 52. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-14T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-53",
+    "title": "LeetCode 977: Dummy Problem 53",
+    "tags": [
+      "Heap",
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 53. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-18T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-54",
+    "title": "LeetCode 669: Dummy Problem 54",
+    "tags": [
+      "Sliding Window"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 54. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-03T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-55",
+    "title": "LeetCode 852: Dummy Problem 55",
+    "tags": [
+      "Backtracking",
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 55. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-26T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-56",
+    "title": "LeetCode 938: Dummy Problem 56",
+    "tags": [
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 56. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-07T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-56",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-57",
+    "title": "LeetCode 530: Dummy Problem 57",
+    "tags": [
+      "Tries",
+      "Trees"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 57. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-08T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-58",
+    "title": "LeetCode 578: Dummy Problem 58",
+    "tags": [
+      "Tries"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 58. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-13T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-59",
+    "title": "LeetCode 998: Dummy Problem 59",
+    "tags": [
+      "Two Pointers",
+      "Linked List",
+      "String"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 59. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-05-05T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-60",
+    "title": "LeetCode 311: Dummy Problem 60",
     "tags": [
       "Dynamic Programming",
-      "Arrays"
+      "Linked List"
     ],
-    "problemLogic": "This is the logic for dummy problem 12. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 12\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 60. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(log N)",
+      "space": "O(N)"
     },
-    "dateAdded": "2026-06-03T08:08:45.174Z",
+    "dateAdded": "2026-05-29T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-13",
-    "title": "Dummy Problem 13",
+    "id": "prob-61",
+    "title": "LeetCode 855: Dummy Problem 61",
+    "tags": [
+      "Two Pointers"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 61. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-18T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-62",
+    "title": "LeetCode 793: Dummy Problem 62",
+    "tags": [
+      "Array",
+      "Binary Search",
+      "Graphs"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 62. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-12T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-63",
+    "title": "LeetCode 773: Dummy Problem 63",
+    "tags": [
+      "Sliding Window",
+      "Greedy"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 63. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-30T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-63",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-64",
+    "title": "LeetCode 466: Dummy Problem 64",
+    "tags": [
+      "Two Pointers",
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 64. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-05-13T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-65",
+    "title": "LeetCode 278: Dummy Problem 65",
+    "tags": [
+      "Greedy",
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 65. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-31T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-66",
+    "title": "LeetCode 724: Dummy Problem 66",
+    "tags": [
+      "Tries"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 66. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-19T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-66",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-67",
+    "title": "LeetCode 955: Dummy Problem 67",
+    "tags": [
+      "Trees",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 67. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-04-25T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-68",
+    "title": "LeetCode 917: Dummy Problem 68",
+    "tags": [
+      "Array",
+      "Math",
+      "Backtracking"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 68. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-04T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-69",
+    "title": "LeetCode 935: Dummy Problem 69",
+    "tags": [
+      "Backtracking"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 69. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-16T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-70",
+    "title": "LeetCode 128: Dummy Problem 70",
+    "tags": [
+      "Sliding Window"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 70. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-24T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-70",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-71",
+    "title": "LeetCode 924: Dummy Problem 71",
     "tags": [
       "Graphs",
-      "DFS"
+      "String"
     ],
-    "problemLogic": "This is the logic for dummy problem 13. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 13\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 71. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(N!)",
+      "space": "O(N)"
     },
-    "dateAdded": "2026-06-02T08:08:45.174Z",
-    "otherWays": []
+    "dateAdded": "2026-05-28T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-71",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
   },
   {
-    "id": "prob-dummy-14",
-    "title": "Dummy Problem 14",
+    "id": "prob-72",
+    "title": "LeetCode 300: Dummy Problem 72",
+    "tags": [
+      "Greedy",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 72. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(log N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-28T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-73",
+    "title": "LeetCode 681: Dummy Problem 73",
     "tags": [
       "Graphs",
-      "DFS"
+      "Tries",
+      "Heap"
     ],
-    "problemLogic": "This is the logic for dummy problem 14. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 14\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 73. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-06-09T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-73",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-74",
+    "title": "LeetCode 940: Dummy Problem 74",
+    "tags": [
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 74. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-04-30T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-75",
+    "title": "LeetCode 458: Dummy Problem 75",
+    "tags": [
+      "Tries",
+      "Dynamic Programming",
+      "Sliding Window"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 75. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-01T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-75",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-76",
+    "title": "LeetCode 428: Dummy Problem 76",
+    "tags": [
+      "Greedy"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 76. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
       "time": "O(N)",
       "space": "O(1)"
     },
-    "dateAdded": "2026-06-01T08:08:45.174Z",
+    "dateAdded": "2026-05-05T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-77",
+    "title": "LeetCode 532: Dummy Problem 77",
+    "tags": [
+      "Array",
+      "Tries",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 77. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-03T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-77",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-78",
+    "title": "LeetCode 735: Dummy Problem 78",
+    "tags": [
+      "Math"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 78. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-27T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-79",
+    "title": "LeetCode 220: Dummy Problem 79",
+    "tags": [
+      "Tries",
+      "Trees",
+      "Backtracking"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 79. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-22T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-79",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-80",
+    "title": "LeetCode 63: Dummy Problem 80",
+    "tags": [
+      "Greedy",
+      "Dynamic Programming",
+      "Array"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 80. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-04-19T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-80",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-81",
+    "title": "LeetCode 699: Dummy Problem 81",
+    "tags": [
+      "Two Pointers"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 81. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(1)"
+    },
+    "dateAdded": "2026-04-24T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-82",
+    "title": "LeetCode 488: Dummy Problem 82",
+    "tags": [
+      "Math",
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 82. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-28T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-83",
+    "title": "LeetCode 275: Dummy Problem 83",
+    "tags": [
+      "Graphs",
+      "Heap"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 83. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-06-15T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-15",
-    "title": "Dummy Problem 15",
+    "id": "prob-84",
+    "title": "LeetCode 311: Dummy Problem 84",
+    "tags": [
+      "Greedy",
+      "Two Pointers"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 84. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-11T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-85",
+    "title": "LeetCode 673: Dummy Problem 85",
+    "tags": [
+      "Array",
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 85. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-06-04T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-86",
+    "title": "LeetCode 322: Dummy Problem 86",
+    "tags": [
+      "Trees",
+      "Math"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 86. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N^2)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-06-08T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-86",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-87",
+    "title": "LeetCode 824: Dummy Problem 87",
+    "tags": [
+      "Sliding Window",
+      "Binary Search"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 87. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-25T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-88",
+    "title": "LeetCode 448: Dummy Problem 88",
+    "tags": [
+      "Two Pointers",
+      "Math",
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 88. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-19T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-89",
+    "title": "LeetCode 845: Dummy Problem 89",
+    "tags": [
+      "Math"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 89. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(2^N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-25T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-90",
+    "title": "LeetCode 174: Dummy Problem 90",
+    "tags": [
+      "Backtracking",
+      "Dynamic Programming"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 90. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N)"
+    },
+    "dateAdded": "2026-04-28T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-90",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-91",
+    "title": "LeetCode 993: Dummy Problem 91",
+    "tags": [
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 91. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-04-25T09:23:57.693Z",
+    "otherWays": []
+  },
+  {
+    "id": "prob-92",
+    "title": "LeetCode 30: Dummy Problem 92",
+    "tags": [
+      "Backtracking",
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 92. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(1)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-05-24T09:23:57.693Z",
+    "otherWays": [],
+    "problemUrl": "https://leetcode.com/problems/dummy"
+  },
+  {
+    "id": "prob-93",
+    "title": "LeetCode 26: Dummy Problem 93",
+    "tags": [
+      "String",
+      "Two Pointers"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 93. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
+    "complexity": {
+      "time": "O(N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-04T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-93",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-94",
+    "title": "LeetCode 526: Dummy Problem 94",
+    "tags": [
+      "Greedy",
+      "Graphs"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 94. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
+    "complexity": {
+      "time": "O(N!)",
+      "space": "O(N^2)"
+    },
+    "dateAdded": "2026-04-25T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-94",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-95",
+    "title": "LeetCode 60: Dummy Problem 95",
+    "tags": [
+      "String",
+      "Linked List"
+    ],
+    "problemLogic": "This is a detailed explanation of the logic for problem 95. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
+    "complexity": {
+      "time": "O(N log N)",
+      "space": "O(log N)"
+    },
+    "dateAdded": "2026-05-12T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-95",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prob-96",
+    "title": "LeetCode 563: Dummy Problem 96",
     "tags": [
       "Dynamic Programming",
-      "Arrays"
+      "Array"
     ],
-    "problemLogic": "This is the logic for dummy problem 15. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 15\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 96. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int left = i + 1, right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum == 0) {\n                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++; right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
     "complexity": {
       "time": "O(N)",
-      "space": "O(1)"
+      "space": "O(N^2)"
     },
-    "dateAdded": "2026-05-31T08:08:45.174Z",
+    "dateAdded": "2026-05-26T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-16",
-    "title": "Dummy Problem 16",
+    "id": "prob-97",
+    "title": "LeetCode 680: Dummy Problem 97",
     "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 16. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 16\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-30T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-17",
-    "title": "Dummy Problem 17",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 17. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 17\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-29T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-18",
-    "title": "Dummy Problem 18",
-    "tags": [
+      "Binary Search",
       "Dynamic Programming",
-      "Arrays"
+      "Math"
     ],
-    "problemLogic": "This is the logic for dummy problem 18. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 18\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 97. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(2^N)",
+      "space": "O(log N)"
     },
-    "dateAdded": "2026-05-28T08:08:45.174Z",
-    "otherWays": []
+    "dateAdded": "2026-04-21T09:23:57.693Z",
+    "otherWays": [
+      {
+        "id": "alt-97",
+        "title": "Brute Force Approach",
+        "logic": "Just loop through everything twice.",
+        "code": "for(int i=0; i<n; i++) for(int j=0; j<n; j++) doSomething();",
+        "complexity": {
+          "time": "O(N^2)",
+          "space": "O(1)"
+        }
+      }
+    ]
   },
   {
-    "id": "prob-dummy-19",
-    "title": "Dummy Problem 19",
+    "id": "prob-98",
+    "title": "LeetCode 917: Dummy Problem 98",
     "tags": [
       "Graphs",
-      "DFS"
+      "Greedy"
     ],
-    "problemLogic": "This is the logic for dummy problem 19. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 19\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 98. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "Forgot to check edge cases for null arrays.\nUsed wrong index in the inner loop.",
+    "code": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(N^2)",
+      "space": "O(log N)"
     },
-    "dateAdded": "2026-05-27T08:08:45.174Z",
+    "dateAdded": "2026-04-26T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-20",
-    "title": "Dummy Problem 20",
+    "id": "prob-99",
+    "title": "LeetCode 56: Dummy Problem 99",
     "tags": [
-      "Graphs",
-      "DFS"
+      "Math",
+      "Dynamic Programming"
     ],
-    "problemLogic": "This is the logic for dummy problem 20. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 20\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 99. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(1)",
+      "space": "O(N)"
     },
-    "dateAdded": "2026-05-26T08:08:45.174Z",
+    "dateAdded": "2026-05-05T09:23:57.693Z",
     "otherWays": []
   },
   {
-    "id": "prob-dummy-21",
-    "title": "Dummy Problem 21",
+    "id": "prob-100",
+    "title": "LeetCode 745: Dummy Problem 100",
     "tags": [
-      "Dynamic Programming",
-      "Arrays"
+      "Math"
     ],
-    "problemLogic": "This is the logic for dummy problem 21. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 21\n  return n;\n}",
+    "problemLogic": "This is a detailed explanation of the logic for problem 100. We use the optimal approach here to reduce the time complexity.",
+    "mistakes": "None. Solved it first try.",
+    "code": "class LRUCache {\n    class Node {\n        int key, val;\n        Node prev, next;\n        Node(int key, int val) { this.key = key; this.val = val; }\n    }\n    Node head = new Node(0, 0), tail = new Node(0, 0);\n    Map<Integer, Node> map = new HashMap<>();\n    int capacity;\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        head.next = tail; tail.prev = head;\n    }\n    public int get(int key) {\n        if (map.containsKey(key)) {\n            Node node = map.get(key);\n            remove(node);\n            insert(node);\n            return node.val;\n        }\n        return -1;\n    }\n    public void put(int key, int value) {\n        if (map.containsKey(key)) remove(map.get(key));\n        if (map.size() == capacity) remove(tail.prev);\n        insert(new Node(key, value));\n    }\n    private void remove(Node node) {\n        map.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    private void insert(Node node) {\n        map.put(node.key, node);\n        node.next = head.next;\n        node.next.prev = node;\n        head.next = node;\n        node.prev = head;\n    }\n}",
     "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
+      "time": "O(N log N)",
+      "space": "O(N^2)"
     },
-    "dateAdded": "2026-05-25T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-22",
-    "title": "Dummy Problem 22",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 22. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 22\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-24T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-23",
-    "title": "Dummy Problem 23",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 23. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 23\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-23T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-24",
-    "title": "Dummy Problem 24",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 24. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 24\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-22T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-25",
-    "title": "Dummy Problem 25",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 25. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 25\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-21T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-26",
-    "title": "Dummy Problem 26",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 26. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 26\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-20T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-27",
-    "title": "Dummy Problem 27",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 27. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 27\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-19T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-28",
-    "title": "Dummy Problem 28",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 28. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 28\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-18T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-29",
-    "title": "Dummy Problem 29",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 29. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 29\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-17T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-30",
-    "title": "Dummy Problem 30",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 30. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 30\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-16T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-31",
-    "title": "Dummy Problem 31",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 31. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 31\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-15T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-32",
-    "title": "Dummy Problem 32",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 32. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 32\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-14T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-33",
-    "title": "Dummy Problem 33",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 33. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 33\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-13T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-34",
-    "title": "Dummy Problem 34",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 34. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 34\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-12T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-35",
-    "title": "Dummy Problem 35",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 35. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 35\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-11T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-36",
-    "title": "Dummy Problem 36",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 36. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 36\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-10T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-37",
-    "title": "Dummy Problem 37",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 37. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 37\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-09T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-38",
-    "title": "Dummy Problem 38",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 38. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 38\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-08T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-39",
-    "title": "Dummy Problem 39",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 39. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 39\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-07T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-40",
-    "title": "Dummy Problem 40",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 40. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 40\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-06T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-41",
-    "title": "Dummy Problem 41",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 41. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 41\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-05T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-42",
-    "title": "Dummy Problem 42",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 42. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 42\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-04T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-43",
-    "title": "Dummy Problem 43",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 43. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 43\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-03T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-44",
-    "title": "Dummy Problem 44",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 44. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 44\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-02T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-45",
-    "title": "Dummy Problem 45",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 45. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 45\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-05-01T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-46",
-    "title": "Dummy Problem 46",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 46. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 46\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-30T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-47",
-    "title": "Dummy Problem 47",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 47. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 47\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-29T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-48",
-    "title": "Dummy Problem 48",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 48. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 48\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-28T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-49",
-    "title": "Dummy Problem 49",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 49. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 49\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-27T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-50",
-    "title": "Dummy Problem 50",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 50. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 50\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-26T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-51",
-    "title": "Dummy Problem 51",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 51. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 51\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-25T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-52",
-    "title": "Dummy Problem 52",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 52. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 52\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-24T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-53",
-    "title": "Dummy Problem 53",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 53. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 53\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-23T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-54",
-    "title": "Dummy Problem 54",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 54. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 54\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-22T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-55",
-    "title": "Dummy Problem 55",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 55. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 55\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-21T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-56",
-    "title": "Dummy Problem 56",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 56. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 56\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-20T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-57",
-    "title": "Dummy Problem 57",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 57. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 57\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-19T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-58",
-    "title": "Dummy Problem 58",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 58. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 58\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-18T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-59",
-    "title": "Dummy Problem 59",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 59. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 59\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-17T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-60",
-    "title": "Dummy Problem 60",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 60. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 60\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-16T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-61",
-    "title": "Dummy Problem 61",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 61. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 61\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-15T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-62",
-    "title": "Dummy Problem 62",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 62. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 62\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-14T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-63",
-    "title": "Dummy Problem 63",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 63. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 63\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-13T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-64",
-    "title": "Dummy Problem 64",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 64. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 64\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-12T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-65",
-    "title": "Dummy Problem 65",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 65. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 65\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-11T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-66",
-    "title": "Dummy Problem 66",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 66. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 66\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-10T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-67",
-    "title": "Dummy Problem 67",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 67. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 67\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-09T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-68",
-    "title": "Dummy Problem 68",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 68. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 68\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-08T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-69",
-    "title": "Dummy Problem 69",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 69. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 69\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-07T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-70",
-    "title": "Dummy Problem 70",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 70. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 70\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-06T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-71",
-    "title": "Dummy Problem 71",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 71. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 71\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-05T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-72",
-    "title": "Dummy Problem 72",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 72. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 72\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-04T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-73",
-    "title": "Dummy Problem 73",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 73. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 73\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-03T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-74",
-    "title": "Dummy Problem 74",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 74. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 74\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-02T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-75",
-    "title": "Dummy Problem 75",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 75. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 75\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-04-01T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-76",
-    "title": "Dummy Problem 76",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 76. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 76\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-31T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-77",
-    "title": "Dummy Problem 77",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 77. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 77\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-30T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-78",
-    "title": "Dummy Problem 78",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 78. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 78\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-29T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-79",
-    "title": "Dummy Problem 79",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 79. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 79\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-28T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-80",
-    "title": "Dummy Problem 80",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 80. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 80\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-27T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-81",
-    "title": "Dummy Problem 81",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 81. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 81\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-26T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-82",
-    "title": "Dummy Problem 82",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 82. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 82\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-25T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-83",
-    "title": "Dummy Problem 83",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 83. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 83\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-24T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-84",
-    "title": "Dummy Problem 84",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 84. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 84\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-23T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-85",
-    "title": "Dummy Problem 85",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 85. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 85\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-22T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-86",
-    "title": "Dummy Problem 86",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 86. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 86\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-21T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-87",
-    "title": "Dummy Problem 87",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 87. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 87\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-20T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-88",
-    "title": "Dummy Problem 88",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 88. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 88\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-19T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-89",
-    "title": "Dummy Problem 89",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 89. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 89\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-18T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-90",
-    "title": "Dummy Problem 90",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 90. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 90\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-17T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-91",
-    "title": "Dummy Problem 91",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 91. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 91\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-16T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-92",
-    "title": "Dummy Problem 92",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 92. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 92\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-15T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-93",
-    "title": "Dummy Problem 93",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 93. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 93\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-14T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-94",
-    "title": "Dummy Problem 94",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 94. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 94\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-13T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-95",
-    "title": "Dummy Problem 95",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 95. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 95\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-12T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-96",
-    "title": "Dummy Problem 96",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 96. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 96\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-11T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-97",
-    "title": "Dummy Problem 97",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 97. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 97\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-10T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-98",
-    "title": "Dummy Problem 98",
-    "tags": [
-      "Graphs",
-      "DFS"
-    ],
-    "problemLogic": "This is the logic for dummy problem 98. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 98\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-09T08:08:45.174Z",
-    "otherWays": []
-  },
-  {
-    "id": "prob-dummy-99",
-    "title": "Dummy Problem 99",
-    "tags": [
-      "Dynamic Programming",
-      "Arrays"
-    ],
-    "problemLogic": "This is the logic for dummy problem 99. It involves traversing a grid and finding the optimal path.",
-    "mistakes": "Forgot to handle edge case where n=0.",
-    "code": "function solve(n) {\n  // Solution 99\n  return n;\n}",
-    "complexity": {
-      "time": "O(N)",
-      "space": "O(1)"
-    },
-    "dateAdded": "2026-03-08T08:08:45.174Z",
+    "dateAdded": "2026-05-05T09:23:57.693Z",
     "otherWays": []
   }
 ];
