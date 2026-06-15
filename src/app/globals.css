@@ -572,7 +572,15 @@ body {
   .header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 8px;
+    position: sticky;
+    top: -10px;
+    z-index: 50;
+    background: var(--bg-color);
+    padding: 10px 0;
+    margin-top: -10px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 6px -6px rgba(0,0,0,0.5);
   }
 
   .header-actions {
@@ -580,7 +588,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
   }
 
   .header-controls {
@@ -588,7 +596,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 5px;
   }
 
   .search-bar {
